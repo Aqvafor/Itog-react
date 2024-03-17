@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Buttons from '../button/Buttons';
+import Modal from '../modal/Modal';
 import Ellipse from '../elipse/Elipse';
 import H2 from '../h2/H2';
 import possibleFeaturesData from '../../data/features.json';
@@ -25,6 +26,12 @@ const imagesMap = {
 };
 
 const Possible = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const toggleModal = () => {
+        console.log('toggleModal called');
+        setIsModalOpen(!isModalOpen);
+      };
   const [features, setFeatures] = useState([]);
   useEffect(() => {
     setFeatures(possibleFeaturesData);
@@ -66,7 +73,11 @@ const Possible = () => {
   height="1350px"
 />
 <div className="possible-button">
-      <Buttons />
+<div>
+                <Buttons onClick={toggleModal} />
+                {isModalOpen && <Modal key={Date.now()} closeModal={toggleModal} />}
+
+    </div>
 </div>
       </div>
     </div>

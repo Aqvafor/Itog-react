@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Buttons from '../button/Buttons';
+import Modal from '../modal/Modal';
 import './OwnSchool.css'; 
 import TextBlock from '../textBlock/TextBlock';
 import FeatureList from '../feature_list/FeatureList';
@@ -53,6 +54,13 @@ const imagesMapBack = {
   };
 
 const OwnSchool = () => {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+      console.log('toggleModal called');
+      setIsModalOpen(!isModalOpen);
+    };
     const [features, setFeatures] = useState([]);
     useEffect(() => {
       setFeatures(possibleFeaturesData);
@@ -99,7 +107,11 @@ const OwnSchool = () => {
                  text="Все готово для запуска. Попробуйте 7-дневный демо-доступ."
                  variant="colorize" />
                
-                <Buttons />
+               <div>
+                <Buttons onClick={toggleModal} />
+                {isModalOpen && <Modal key={Date.now()} closeModal={toggleModal} />}
+
+    </div>
             </div>
             <div className="own-school-bottom">
 
